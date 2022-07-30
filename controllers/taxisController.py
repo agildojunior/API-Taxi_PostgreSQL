@@ -3,36 +3,13 @@ from models import Taxis
 from config import db
 
 def get_all():
-  rest = Taxis.query.all()
-  return jsonify([taxis.to_json() for taxis in rest]), 200
+    return Taxis.get_all
 
 def get_by_id(id):
-  rest = Taxis.query.get(id)
-  if rest is None:
-    return "Nao encontrado", 404
-  return jsonify(rest.to_json())
+    return Taxis.get_by_id
 
 def insert():
-  if request.is_json:
-    body = request.get_json()
-    res = Taxis (
-      name_motorista = body["name_motorista"],
-      cnpj = body["cnpj"],
-    )
-    db.session.add(res)
-    db.session.commit()
-    return jsonify(res.to_json()) , 201
-  return {"error": "Os dados devem ser JSON"}, 415
+    return Taxis.insert
 
 def update(id):
-  if request.is_json:
-    body = request.get_json()
-    rest = Taxis.query.get(id)
-    if rest is None:
-      return "Nao encontrado", 404
-    if("name_motorista" in body):
-      rest.name_motorista = body["name_motorista"]
-    db.session.add(rest)
-    db.session.commit()
-    return "Atualizado com sucesso", 200
-  return {"error": "Os dados devem ser JSON"}, 415
+    return Taxis.update
