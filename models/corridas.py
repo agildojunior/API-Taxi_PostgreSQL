@@ -72,3 +72,4 @@ class Corridas(db.Model):
       db.session.commit()
       return "Atualizado com sucesso", 200
     return {"error": "Os dados devem ser JSON"}, 415
+

@@ -1,6 +1,6 @@
 import requests, json
 
-a = {"name":"teste123","cnpj":"6666666666"}
+a = {"id_empresa":"1","id_taxis":"1","status_corrida":"aguardando","cliente":"teste","destino":"teste","origem":"teste"}
 
-res=requests.put('http://127.0.0.1:8090/empresas/4',json=a)
+res=requests.post('http://127.0.0.1:8090/corridas',json=a)
 
