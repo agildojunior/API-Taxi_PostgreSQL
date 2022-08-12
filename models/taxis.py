@@ -28,7 +28,6 @@ class Taxis(db.Model):
       body = request.get_json()
       res = Taxis (
         name_motorista = body["name_motorista"],
-        cnpj = body["cnpj"],
       )
       db.session.add(res)
       db.session.commit()

@@ -45,7 +45,7 @@ class Empresas(db.Model):
         return "Nao encontrado", 404
       if("name" in body):
         rest.name = body["name"]
-      if("cpnj" in body):
+      if("cnpj" in body):
         rest.cnpj = body["cnpj"]
       db.session.add(rest)
       db.session.commit()
