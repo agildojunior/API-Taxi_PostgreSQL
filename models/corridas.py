@@ -3,8 +3,8 @@ from flask import jsonify, request
 
 class Corridas(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  id_empresa = db.Column(db.Integer, db.ForeignKey('empresas.id'))
-  id_taxis = db.Column(db.Integer, db.ForeignKey('taxis.id'))
+  id_empresa = db.Column(db.Integer, db.ForeignKey('empresas.id'),nullable=True)
+  id_taxis = db.Column(db.Integer, db.ForeignKey('taxis.id'),nullable=True)
   status_corrida = db.Column(db.String(50))
   cliente = db.Column(db.String(50))
   destino = db.Column(db.String(100))
