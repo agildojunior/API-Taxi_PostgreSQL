@@ -32,7 +32,7 @@ def update(id):
       return "Nao encontrado", 404
     if("nome" in body):
       rest.nome = body["nome"]
-    if("cpnj" in body):
+    if("cnpj" in body):
       rest.cnpj = body["cnpj"]
       
     db.session.add(rest)

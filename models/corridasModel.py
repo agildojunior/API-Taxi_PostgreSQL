@@ -5,6 +5,7 @@ from config import db
 def get_all():
   rest = Corridas.query.all()
   return jsonify([corridas.to_json() for corridas in rest]), 200
+  
 
 def get_by_id(id):
   rest = Corridas.query.get(id)
