@@ -17,13 +17,27 @@ def insert():
   if request.is_json:
     body = request.get_json()
     res = Corridas (
-      origem = body['origem'],
-      destino = body['destino'],
-      id_usuario = body['id_usuario'],
-      id_empresa = body['id_empresa'],
-      id_taxi = body['id_taxi'],
-      id_endereco = body['id_endereco']
+      # origem = body['origem'],
+      # destino = body['destino'],
+      # id_usuario = None,
+      # id_empresa = None,
+      # id_taxi = None,
+      # id_endereco = body['id_endereco']
     )
+    if("origem" in body):
+      res.origem = body["origem"]
+    if("destino" in body):
+      res.destino = body["destino"]
+    if("status" in body):
+      res.status = body["status"]
+    if("id_usuario" in body):
+      res.id_usuario = body["id_usuario"]
+    if("id_empresa" in body):
+      res.id_empresa = body["id_empresa"]
+    if("id_taxi" in body):
+      res.id_taxi = body["id_taxi"]
+    if("id_endereco" in body):
+      res.id_endereco = body["id_endereco"]
     db.session.add(res)
     db.session.commit()
     return jsonify(res.to_json()) , 201
