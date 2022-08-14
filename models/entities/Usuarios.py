@@ -7,6 +7,7 @@ class Usuarios(db.Model):
     senha_usuario = db.Column(db.String(100))
     ativo = db.Column(db.Boolean, default=True)
     id_empresa = db.Column(db.Integer, db.ForeignKey('empresas.id_empresa'))
+    id_taxis = db.Column(db.Integer, db.ForeignKey('taxis.id_taxis'),nullable=True)
     
     def to_json(self):
         return {
@@ -15,5 +16,6 @@ class Usuarios(db.Model):
             "email_usuario": self.email_usuario,
             "senha_usuario": self.senha_usuario,
             "ativo": self.ativo,
-            "id_empresa": self.id_empresa
+            "id_empresa": self.id_empresa,
+            "id_taxis": self.id_taxis
         }

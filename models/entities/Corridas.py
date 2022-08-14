@@ -6,7 +6,7 @@ class Corridas(db.Model):
     destino = db.Column(db.String(100))
     # horario = db.Column(db.DateTime, server_default=db.func.now())
     status = db.Column(db.String(30), default = 'Solicitada')
-    id_usuario = db.Column(db.Integer, db.ForeignKey('usuarios.id_usuario'),nullable=True)
+    nome_usuario = db.Column(db.String(100),nullable=True)
     id_empresa = db.Column(db.Integer, db.ForeignKey('empresas.id_empresa'),nullable=True)
     id_taxi = db.Column(db.Integer, db.ForeignKey('taxis.id_taxis'),nullable=True)
     id_endereco = db.Column(db.Integer, db.ForeignKey('enderecos.id_endereco'),nullable=True)
@@ -19,7 +19,7 @@ class Corridas(db.Model):
         "destino": self.destino,
         # "horario": self.horario,
         "status": self.status,
-        "id_usuario": self.id_usuario,
+        "nome_usuario": self.nome_usuario,
         "id_empresa": self.id_empresa,
         "id_taxi": self.id_taxi,
         "id_endereco": self.id_endereco,

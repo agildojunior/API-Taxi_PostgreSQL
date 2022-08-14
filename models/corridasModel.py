@@ -5,7 +5,6 @@ from config import db
 def get_all():
   rest = Corridas.query.all()
   return jsonify([corridas.to_json() for corridas in rest]), 200
-  
 
 def get_by_id(id):
   rest = Corridas.query.get(id)
@@ -19,7 +18,7 @@ def insert():
     res = Corridas (
       # origem = body['origem'],
       # destino = body['destino'],
-      # id_usuario = None,
+      # nome_usuario = None,
       # id_empresa = None,
       # id_taxi = None,
       # id_endereco = body['id_endereco']
@@ -30,8 +29,8 @@ def insert():
       res.destino = body["destino"]
     if("status" in body):
       res.status = body["status"]
-    if("id_usuario" in body):
-      res.id_usuario = body["id_usuario"]
+    if("nome_usuario" in body):
+      res.nome_usuario = body["nome_usuario"]
     if("id_empresa" in body):
       res.id_empresa = body["id_empresa"]
     if("id_taxi" in body):
@@ -55,8 +54,8 @@ def update(id):
       rest.destino = body["destino"]
     if("status" in body):
       rest.status = body["status"]
-    if("id_usuario" in body):
-      rest.id_usuario = body["id_usuario"]
+    if("nome_usuario" in body):
+      rest.nome_usuario = body["nome_usuario"]
     if("id_empresa" in body):
       rest.id_empresa = body["id_empresa"]
     if("id_taxi" in body):

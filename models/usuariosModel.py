@@ -19,7 +19,8 @@ def insert():
         nome_usuario = body['nome_usuario'],
         email_usuario = body["email_usuario"],
         senha_usuario = body["senha_usuario"],
-        id_empresa = body["id_empresa"]
+        id_empresa = body["id_empresa"],
+        id_taxis = body["id_taxis"]
     )
     db.session.add(res)
     db.session.commit()
@@ -40,6 +41,8 @@ def update(id):
       rest.senha_usuario = body["senha_usuario"]
     if("id_empresa" in body):
       rest.id_empresa = body["id_empresa"]
+    if("id_taxis" in body):
+      rest.id_taxis = body["id_taxis"]
     
     db.session.add(rest)
     db.session.commit()
