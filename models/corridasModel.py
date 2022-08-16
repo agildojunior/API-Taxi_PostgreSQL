@@ -2,17 +2,17 @@ from flask import jsonify, request
 from .entities import Corridas
 from config import db
 
-def get_all():
+def get_all(current_empresa):
   rest = Corridas.query.all()
   return jsonify([corridas.to_json() for corridas in rest]), 200
 
-def get_by_id(id):
+def get_by_id(current_empresa,id):
   rest = Corridas.query.get(id)
   if rest is None:
     return "Nao encontrado", 404
   return jsonify(rest.to_json())
 
-def insert():
+def insert(current_empresa):
   if request.is_json:
     body = request.get_json()
     res = Corridas (
@@ -42,7 +42,7 @@ def insert():
     return jsonify(res.to_json()) , 201
   return {"error": "Os dados devem ser JSON"}, 415
 
-def update(id):
+def update(current_empresa,id):
   if request.is_json:
     body = request.get_json()
     rest = Corridas.query.get(id)

@@ -1,13 +1,13 @@
 from models import enderecosModel
 
-def get_all():
-  return enderecosModel.get_all()
+def get_all(current_empresa):
+  return enderecosModel.get_all(current_empresa)
 
-def get_by_id(id):
-  return enderecosModel.get_by_id(id)
+def get_by_id(current_empresa,id):
+  return enderecosModel.get_by_id(current_empresa,id)
 
-def insert():
-  return enderecosModel.insert()
+def insert(current_empresa):
+  return enderecosModel.insert(current_empresa)
 
-def update(id):
-  return enderecosModel.update(id)
+def update(current_empresa,id):
+  return enderecosModel.update(current_empresa,id)

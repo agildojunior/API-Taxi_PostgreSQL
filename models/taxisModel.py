@@ -2,17 +2,17 @@ from flask import jsonify, request
 from .entities import Taxis
 from config import db
 
-def get_all():
+def get_all(current_empresa):
   rest = Taxis.query.all()
   return jsonify([taxis.to_json() for taxis in rest]), 200
 
-def get_by_id(id):
+def get_by_id(current_empresa,id):
   rest = Taxis.query.get(id)
   if rest is None:
     return "Nao encontrado", 404
   return jsonify(rest.to_json())
 
-def insert():
+def insert(current_empresa):
   if request.is_json:
     body = request.get_json()
     res = Taxis (
@@ -28,7 +28,7 @@ def insert():
 
   return {"error": "Os dados devem ser JSON"}, 415
 
-def update(id):
+def update(current_empresa,id):
   if request.is_json:
     body = request.get_json()
     rest = Taxis.query.get(id)

@@ -1,13 +1,13 @@
 from models import usuariosModel
 
-def get_all():
-  return usuariosModel.get_all()
+def get_all(current_empresa):
+  return usuariosModel.get_all(current_empresa)
 
-def get_by_id(id):
-  return usuariosModel.get_by_id(id)
+def get_by_id(current_empresa,id):
+  return usuariosModel.get_by_id(current_empresa,id)
 
-def insert():
-  return usuariosModel.insert()
+def insert(current_empresa):
+  return usuariosModel.insert(current_empresa)
 
-def update(id):
-  return usuariosModel.update(id)
+def update(current_empresa,id):
+  return usuariosModel.update(current_empresa,id)

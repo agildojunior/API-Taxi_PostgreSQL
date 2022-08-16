@@ -1,5 +1,6 @@
 from flask_cors import CORS
 from config import app
+from auth import token_required
 from controllers import corridasController, empresasController, taxisController, enderecosController, usuariosController
 cors = CORS(app)
 
@@ -10,23 +11,27 @@ cors = CORS(app)
 
 #Pegar dados
 @app.route("/empresas",methods=["GET"])
-def get_empresas():
-  return empresasController.get_all()
+@token_required
+def get_empresas(current_empresa):
+  return empresasController.get_all(current_empresa)
 
 #Pegar dados por ID
 @app.route("/empresas/<int:id>" , methods=["GET"])
-def get_empresas_by_id(id):
-  return empresasController.get_by_id(id)
+@token_required
+def get_empresas_by_id(current_empresa,id):
+  return empresasController.get_by_id(current_empresa,id)
 
 #Adicionar dados
 @app.route("/empresas", methods=["POST"])
-def insert_empresas():
-  return empresasController.insert()
+@token_required
+def insert_empresas(current_empresa):
+  return empresasController.insert(current_empresa)
 
 #Editar dados
 @app.route("/empresas/<int:id>" , methods=["PUT"])
-def update_empresas(id):
-  return empresasController.update(id)
+@token_required
+def update_empresas(current_empresa,id):
+  return empresasController.update(current_empresa,id)
 
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -35,23 +40,27 @@ def update_empresas(id):
 
 #Pegar dados
 @app.route("/corridas",methods=["GET"])
-def get_corridas():
-  return corridasController.get_all()
+@token_required
+def get_corridas(current_empresa):
+  return corridasController.get_all(current_empresa)
 
 #Pegar dados por ID'
 @app.route("/corridas/<int:id>" , methods=["GET"])
-def get_corridas_by_id(id):
-  return corridasController.get_by_id(id)
+@token_required
+def get_corridas_by_id(current_empresa,id):
+  return corridasController.get_by_id(current_empresa,id)
 
 #Adicionar dados'
 @app.route("/corridas", methods=["POST"])
-def insert_corridas():
-  return corridasController.insert()
+@token_required
+def insert_corridas(current_empresa):
+  return corridasController.insert(current_empresa)
 
 #Editar dados'
 @app.route("/corridas/<int:id>" , methods=["PUT"])
-def update_corridas(id):
-  return corridasController.update(id)
+@token_required
+def update_corridas(current_empresa,id):
+  return corridasController.update(current_empresa,id)
 
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -60,23 +69,27 @@ def update_corridas(id):
 
 #Pegar dados
 @app.route("/taxis",methods=["GET"])
-def get_taxis():
-  return taxisController.get_all()
+@token_required
+def get_taxis(current_empresa):
+  return taxisController.get_all(current_empresa)
 
 #Pegar dados por ID
 @app.route("/taxis/<int:id>" , methods=["GET"])
-def get_taxis_by_id(id):
-  return taxisController.get_by_id(id)
+@token_required
+def get_taxis_by_id(current_empresa,id):
+  return taxisController.get_by_id(current_empresa,id)
 
 #Adicionar dados
 @app.route("/taxis", methods=["POST"])
-def insert_taxis():
-  return taxisController.insert()
+@token_required
+def insert_taxis(current_empresa):
+  return taxisController.insert(current_empresa)
 
 #Editar dados
 @app.route("/taxis/<int:id>" , methods=["PUT"])
-def update_taxis(id):
-  return taxisController.update(id)
+@token_required
+def update_taxis(current_empresa,id):
+  return taxisController.update(current_empresa,id)
 
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -85,23 +98,27 @@ def update_taxis(id):
 
 #Pegar dados
 @app.route("/usuarios",methods=["GET"])
-def get_usuarios():
-  return usuariosController.get_all()
+@token_required
+def get_usuarios(current_empresa):
+  return usuariosController.get_all(current_empresa)
 
 #Pegar dados por ID
 @app.route("/usuarios/<int:id>" , methods=["GET"])
-def get_usuarios_by_id(id):
-  return usuariosController.get_by_id(id)
+@token_required
+def get_usuarios_by_id(current_empresa,id):
+  return usuariosController.get_by_id(current_empresa,id)
 
 #Adicionar dados
 @app.route("/usuarios", methods=["POST"])
-def insert_usuarios():
-  return usuariosController.insert()
+@token_required
+def insert_usuarios(current_empresa):
+  return usuariosController.insert(current_empresa)
 
 #Editar dados
 @app.route("/usuarios/<int:id>" , methods=["PUT"])
-def update_usuarios(id):
-  return usuariosController.update(id)
+@token_required
+def update_usuarios(current_empresa,id):
+  return usuariosController.update(current_empresa,id)
 
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -110,23 +127,27 @@ def update_usuarios(id):
 
 #Pegar dados
 @app.route("/enderecos",methods=["GET"])
-def get_enderecos():
-  return enderecosController.get_all()
+@token_required
+def get_enderecos(current_empresa):
+  return enderecosController.get_all(current_empresa)
 
 #Pegar dados por ID
 @app.route("/enderecos/<int:id>" , methods=["GET"])
-def get_enderecos_by_id(id):
-  return enderecosController.get_by_id(id)
+@token_required
+def get_enderecos_by_id(current_empresa,id):
+  return enderecosController.get_by_id(current_empresa,id)
 
 #Adicionar dados
 @app.route("/enderecos", methods=["POST"])
-def insert_enderecos():
-  return enderecosController.insert()
+@token_required
+def insert_enderecos(current_empresa):
+  return enderecosController.insert(current_empresa)
 
 #Editar dados
 @app.route("/enderecos/<int:id>" , methods=["PUT"])
-def update_enderecos(id):
-  return enderecosController.update(id)
+@token_required
+def update_enderecos(current_empresa,id):
+  return enderecosController.update(current_empresa,id)
 
 # -------------------------------------------------------------------------
 
