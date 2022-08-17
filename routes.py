@@ -120,6 +120,12 @@ def insert_usuarios(current_empresa):
 def update_usuarios(current_empresa,id):
   return usuariosController.update(current_empresa,id)
 
+#Pegar dados por Email
+@app.route("/usuarios/email/<email>" , methods=["GET"])
+@token_required
+def get_usuarios_by_email(current_empresa,email):
+  return usuariosController.get_by_email(current_empresa,email)
+
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 #                                   Enderecos

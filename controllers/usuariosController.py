@@ -11,3 +11,6 @@ def insert(current_empresa):
 
 def update(current_empresa,id):
   return usuariosModel.update(current_empresa,id)
+
+def get_by_email(current_empresa,email):
+  return usuariosModel.get_by_email(current_empresa,email)

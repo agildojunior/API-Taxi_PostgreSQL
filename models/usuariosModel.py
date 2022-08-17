@@ -12,6 +12,7 @@ def get_by_id(current_empresa,id):
     return "Não encontrado", 404
   return jsonify(rest.to_json())
 
+
 def insert(current_empresa):
   if request.is_json:
     body = request.get_json()
@@ -57,3 +58,9 @@ def update(current_empresa,id):
     db.session.commit()
     return "Atualizado com sucesso", 200
   return {"error": "Os dados devem ser JSON"}, 415
+
+def get_by_email(current_empresa,email):
+  rest = Usuarios.query.filter_by(email_usuario=email).first()
+  if rest is None:
+    return "Não encontrado", 404
+  return jsonify(rest.to_json())
