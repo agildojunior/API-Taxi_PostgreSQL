@@ -16,7 +16,6 @@ def insert(current_empresa):
   if request.is_json:
     body = request.get_json()
     res = Taxis (
-        nome_taxista = body["nome_taxista"],
         telefone_taxista = body["telefone_taxista"],
         modelo_taxi = body["modelo_taxi"],
         placa_taxi = body["placa_taxi"]
@@ -34,8 +33,6 @@ def update(current_empresa,id):
     rest = Taxis.query.get(id)
     if rest is None:
       return "Nao encontrado", 404
-    if("nome_taxista" in body):
-      rest.nome_taxista = body["nome_taxista"]
     if("telefone_taxista" in body):
       rest.telefone_taxista = body["telefone_taxista"]
     if("modelo_taxi" in body):
