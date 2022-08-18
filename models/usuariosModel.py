@@ -20,7 +20,6 @@ def insert(current_empresa):
         # nome_usuario = body['nome_usuario'],
         # email_usuario = body["email_usuario"],
         # senha_usuario = body["senha_usuario"],
-        # id_taxis = body["id_taxis"]
     )
     if("nome_usuario" in body):
       res.nome_usuario = body["nome_usuario"]
@@ -28,8 +27,6 @@ def insert(current_empresa):
       res.email_usuario = body["email_usuario"]
     if("senha_usuario" in body):
       res.senha_usuario = body["senha_usuario"]
-    if("id_taxis" in body):
-      res.id_taxis = body["id_taxis"]
     if("tipo_usuario" in body):
       res.tipo_usuario = body["tipo_usuario"]
     db.session.add(res)
@@ -49,8 +46,6 @@ def update(current_empresa,id):
       rest.email_usuario = body["email_usuario"]
     if("senha_usuario" in body):
       rest.senha_usuario = body["senha_usuario"]
-    if("id_taxis" in body):
-      rest.id_taxis = body["id_taxis"]
     if("tipo_usuario" in body):
       rest.tipo_usuario = body["tipo_usuario"]
     
