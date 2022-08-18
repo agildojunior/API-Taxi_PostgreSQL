@@ -9,7 +9,6 @@ class Corridas(db.Model):
     nome_usuario = db.Column(db.String(100),nullable=True)
     id_empresa = db.Column(db.Integer, db.ForeignKey('empresas.id_empresa'),nullable=True)
     id_taxi = db.Column(db.Integer, db.ForeignKey('taxis.id_taxis'),nullable=True)
-    id_endereco = db.Column(db.Integer, db.ForeignKey('enderecos.id_endereco'),nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
   
     def to_json(self):
@@ -22,7 +21,6 @@ class Corridas(db.Model):
         "nome_usuario": self.nome_usuario,
         "id_empresa": self.id_empresa,
         "id_taxi": self.id_taxi,
-        "id_endereco": self.id_endereco,
         "created_at": self.created_at
       }
 

@@ -21,7 +21,6 @@ def insert(current_empresa):
       # nome_usuario = None,
       # id_empresa = None,
       # id_taxi = None,
-      # id_endereco = body['id_endereco']
     )
     if("origem" in body):
       res.origem = body["origem"]
@@ -35,8 +34,6 @@ def insert(current_empresa):
       res.id_empresa = body["id_empresa"]
     if("id_taxi" in body):
       res.id_taxi = body["id_taxi"]
-    if("id_endereco" in body):
-      res.id_endereco = body["id_endereco"]
     db.session.add(res)
     db.session.commit()
     return jsonify(res.to_json()) , 201
@@ -60,8 +57,6 @@ def update(current_empresa,id):
       rest.id_empresa = body["id_empresa"]
     if("id_taxi" in body):
       rest.id_taxi = body["id_taxi"]
-    if("id_endereco" in body):
-      rest.id_endereco = body["id_endereco"]
     
     db.session.add(rest)
     db.session.commit()
