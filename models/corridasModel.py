@@ -62,3 +62,12 @@ def update(current_empresa,id):
     db.session.commit()
     return "Atualizado com sucesso", 200
   return {"error": "Os dados devem ser JSON"}, 415
+
+def delete(current_empresa,id):
+  rest = Corridas.query.get(id)
+  if rest is None:
+      return {"error": {"error": "Nao encontrado"}}, 404
+  rest.ativo = False
+  db.session.add(rest)
+  db.session.commit()
+  return {"message": "Deletado com sucesso"}, 200

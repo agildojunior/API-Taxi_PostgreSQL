@@ -59,3 +59,12 @@ def get_by_email(current_empresa,email):
   if rest is None:
     return "Não encontrado", 404
   return jsonify(rest.to_json())
+
+def delete(current_empresa,id):
+  rest = Usuarios.query.get(id)
+  if rest is None:
+      return {"error": {"error": "Nao encontrado"}}, 404
+  rest.ativo = False
+  db.session.add(rest)
+  db.session.commit()
+  return {"message": "Deletado com sucesso"}, 200

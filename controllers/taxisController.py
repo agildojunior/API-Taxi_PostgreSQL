@@ -11,3 +11,6 @@ def insert(current_empresa):
 
 def update(current_empresa,id):
   return taxisModel.update(current_empresa,id)
+
+def delete(current_empresa,id): 
+  return taxisModel.delete(current_empresa,id)

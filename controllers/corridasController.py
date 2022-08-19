@@ -11,3 +11,6 @@ def insert(current_empresa):
 
 def update(current_empresa,id):
   return corridasModel.update(current_empresa,id)
+
+def delete(current_empresa,id): 
+  return corridasModel.delete(current_empresa,id)

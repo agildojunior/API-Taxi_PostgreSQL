@@ -33,6 +33,12 @@ def insert_empresas(current_empresa):
 def update_empresas(current_empresa,id):
   return empresasController.update(current_empresa,id)
 
+#Metodo Delete
+@app.route("/empresas/<int:id>", methods=["DELETE"])
+@token_required
+def delete_empresas(current_empresa,id):
+  return empresasController.delete(current_empresa,id)
+
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 #                                   Corridas
@@ -62,6 +68,12 @@ def insert_corridas(current_empresa):
 def update_corridas(current_empresa,id):
   return corridasController.update(current_empresa,id)
 
+#Metodo Delete
+@app.route("/corridas/<int:id>", methods=["DELETE"])
+@token_required
+def delete_corridas(current_empresa,id):
+  return corridasController.delete(current_empresa,id)
+
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 #                                   Taxis
@@ -90,6 +102,12 @@ def insert_taxis(current_empresa):
 @token_required
 def update_taxis(current_empresa,id):
   return taxisController.update(current_empresa,id)
+
+#Metodo Delete
+@app.route("/taxis/<int:id>", methods=["DELETE"])
+@token_required
+def delete_taxis(current_empresa,id):
+  return taxisController.delete(current_empresa,id)
 
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -126,34 +144,11 @@ def update_usuarios(current_empresa,id):
 def get_usuarios_by_email(current_empresa,email):
   return usuariosController.get_by_email(current_empresa,email)
 
-# --------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-#                                   Enderecos
-# --------------------------------------------------------------------------
-
-#Pegar dados
-@app.route("/enderecos",methods=["GET"])
+#Metodo Delete
+@app.route("/usuarios/<int:id>", methods=["DELETE"])
 @token_required
-def get_enderecos(current_empresa):
-  return enderecosController.get_all(current_empresa)
-
-#Pegar dados por ID
-@app.route("/enderecos/<int:id>" , methods=["GET"])
-@token_required
-def get_enderecos_by_id(current_empresa,id):
-  return enderecosController.get_by_id(current_empresa,id)
-
-#Adicionar dados
-@app.route("/enderecos", methods=["POST"])
-@token_required
-def insert_enderecos(current_empresa):
-  return enderecosController.insert(current_empresa)
-
-#Editar dados
-@app.route("/enderecos/<int:id>" , methods=["PUT"])
-@token_required
-def update_enderecos(current_empresa,id):
-  return enderecosController.update(current_empresa,id)
+def delete_usuarios(current_empresa,id):
+  return usuariosController.delete(current_empresa,id)
 
 # -------------------------------------------------------------------------
 
