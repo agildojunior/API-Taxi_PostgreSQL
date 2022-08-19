@@ -1,7 +1,7 @@
 from flask_cors import CORS
 from config import app
 from auth import token_required
-from controllers import corridasController, empresasController, taxisController, enderecosController, usuariosController
+from controllers import corridasController, empresasController, taxisController, usuariosController
 cors = CORS(app)
 
 # --------------------------------------------------------------------------
