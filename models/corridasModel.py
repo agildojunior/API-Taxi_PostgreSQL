@@ -1,6 +1,12 @@
 from flask import jsonify, request
 from .entities import Corridas
 from config import db
+from pycep_correios import get_address_from_cep, WebService, exceptions
+import googlemaps
+import re
+import sys
+
+api_key = 'AIzaSyA2q035Meede4sQ6jde84BGysxvXpDalmI'
 
 def get_all(current_empresa):
   rest = Corridas.query.all()
@@ -22,6 +28,27 @@ def insert(current_empresa):
       # id_empresa = None,
       # id_taxi = None,
     )
+    
+    if('cep_origem' in body and 'cep_destino' in body):
+      cepOrigem = trataCep(body['cep_origem'])
+      cepDestino = trataCep(body['cep_destino'])
+      print('teste2')
+      if (verificaCep(cepOrigem) == ''):
+          print('teste3')
+          return {"error": "CEP origem inválido"}, 400
+      elif(verificaCep(cepDestino) == ''):
+          print('oi')
+          return {"error": "CEP destino inválido"}, 400
+      else:
+          cepOrigemNumber = verificaCep(cepOrigem)
+          cepDestinoNumber = verificaCep(cepDestino)
+          
+          valorCorrida = calculaCorrida(cepOrigemNumber, cepDestinoNumber)
+
+          res.cep_origem = cepOrigemNumber
+          res.cep_destino = cepDestinoNumber
+          res.preco = valorCorrida
+      
     if("origem" in body):
       res.origem = body["origem"]
     if("destino" in body):
@@ -34,8 +61,10 @@ def insert(current_empresa):
       res.id_empresa = body["id_empresa"]
     if("id_taxi" in body):
       res.id_taxi = body["id_taxi"]
+      
     db.session.add(res)
     db.session.commit()
+    
     return jsonify(res.to_json()) , 201
   return {"error": "Os dados devem ser JSON"}, 415
 
@@ -53,8 +82,7 @@ def update(current_empresa,id):
       rest.status = body["status"]
     if("nome_usuario" in body):
       rest.nome_usuario = body["nome_usuario"]
-    if("id_empresa" in body):
-      rest.id_empresa = body["id_empresa"]
+
     if("id_taxi" in body):
       rest.id_taxi = body["id_taxi"]
     
@@ -71,3 +99,61 @@ def delete(current_empresa,id):
   db.session.add(rest)
   db.session.commit()
   return {"message": "Deletado com sucesso"}, 200
+
+
+
+
+####################################################
+
+def trataCep(cep):
+    try:
+      if(len(cep) < 8):
+          print('teste')
+          return {"error": "CEP inválido"}, 400
+          
+      else:
+          print(cep)
+          cepNumbers = re.sub(r"[^0-9]","", cep)
+          #retira caracteres especiais e letras, deixando apenas números
+          cepTratado = str(cepNumbers[0:8])
+    except:
+      return {"error": 'CEP inválido'}, 400
+    return cepTratado
+
+def verificaCep(cepRecebido):
+    try:
+        cep = get_address_from_cep(cepRecebido, webservice=WebService.CORREIOS)
+        cidadeCep = cep['cidade']
+        
+    except exceptions.InvalidCEP as eic:
+        return {"error": eic}, 400
+
+    except exceptions.CEPNotFound as ecnf:
+        return {"error": ecnf}, 400
+
+    except exceptions.ConnectionError as errc:
+        return {"error": errc}, 400
+      
+    except exceptions.Timeout as errt:
+        return {"error": errt}, 400
+
+    except exceptions.HTTPError as errh:
+        return {"error": errh}, 400
+
+    except exceptions.BaseException as e:
+        return {"error": e}, 400
+        
+    return cidadeCep
+
+def calculaCorrida(origem, destino):   
+    gmaps = googlemaps.Client(key=api_key) 
+    my_dist = gmaps.distance_matrix(origem,destino)['rows'][0]['elements'][0] 
+    print(my_dist)
+    
+    distancia = my_dist['distance']
+    valorDistancia = distancia['value']
+    
+    valorKm = int(2.50 * (valorDistancia / 1000) + 10)
+    
+    return valorKm
+    
