@@ -32,12 +32,12 @@ def insert(current_empresa):
     if('cep_origem' in body and 'cep_destino' in body):
       cepOrigem = trataCep(body['cep_origem'])
       cepDestino = trataCep(body['cep_destino'])
-      print('teste2')
+      
       if (verificaCep(cepOrigem) == ''):
-          print('teste3')
+          
           return {"error": "CEP origem inválido"}, 400
       elif(verificaCep(cepDestino) == ''):
-          print('oi')
+          
           return {"error": "CEP destino inválido"}, 400
       else:
           cepOrigemNumber = verificaCep(cepOrigem)
@@ -116,11 +116,11 @@ def delete(current_empresa,id):
 def trataCep(cep):
     try:
       if(len(cep) < 8):
-          print('teste')
+          
           return {"error": "CEP inválido"}, 400
           
       else:
-          print(cep)
+          
           cepNumbers = re.sub(r"[^0-9]","", cep)
           #retira caracteres especiais e letras, deixando apenas números
           cepTratado = str(cepNumbers[0:8])
@@ -156,7 +156,7 @@ def verificaCep(cepRecebido):
 def calculaCorrida(origem, destino):   
     gmaps = googlemaps.Client(key=api_key) 
     my_dist = gmaps.distance_matrix(origem,destino)['rows'][0]['elements'][0] 
-    print(my_dist)
+    
     
     distancia = my_dist['distance']
     valorDistancia = distancia['value']
