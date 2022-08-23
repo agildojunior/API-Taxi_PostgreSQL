@@ -74,6 +74,12 @@ def update_corridas(current_empresa,id):
 def delete_corridas(current_empresa,id):
   return corridasController.delete(current_empresa,id)
 
+#Pegar dados da corrida por ID da empresa
+@app.route("/relatorio/corridas/<id_empresa>" , methods=["GET"])
+@token_required
+def get_corridas_by_empresas(current_empresa,id_empresa):
+  return corridasController.get_by_id_empresa(current_empresa,id_empresa)
+
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 #                                   Taxis

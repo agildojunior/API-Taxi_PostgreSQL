@@ -91,6 +91,14 @@ def update(current_empresa,id):
     return "Atualizado com sucesso", 200
   return {"error": "Os dados devem ser JSON"}, 415
 
+#Relatorios
+def get_by_id_empresa(current_empresa,id_empresa):
+  rest = Corridas.query.filter_by(id_empresa=id_empresa).all()
+  if rest is None:
+    return "Não encontrado", 404
+  return jsonify([corridas.to_json() for corridas in rest]), 200
+  
+
 def delete(current_empresa,id):
   rest = Corridas.query.get(id)
   if rest is None:

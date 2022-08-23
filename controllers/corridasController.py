@@ -14,3 +14,6 @@ def update(current_empresa,id):
 
 def delete(current_empresa,id): 
   return corridasModel.delete(current_empresa,id)
+
+def get_by_id_empresa(current_empresa,id_empresa): 
+  return corridasModel.get_by_id_empresa(current_empresa,id_empresa)
