@@ -3,8 +3,8 @@ from .entities import Corridas
 from config import db
 from pycep_correios import get_address_from_cep, WebService, exceptions
 import googlemaps
+from datetime import date
 import re
-import sys
 
 api_key = 'AIzaSyA2q035Meede4sQ6jde84BGysxvXpDalmI'
 
@@ -165,3 +165,15 @@ def calculaCorrida(origem, destino):
     
     return valorKm
     
+def get_corridas_report(id):
+  contaCorridasMes = Corridas.query.filter(Corridas.created_at > date(2022, 8, 1)).count()
+  contaCorridasSolicitadas = Corridas.query.filter_by(status = 'Finalizada', id_empresa = id).count()
+  
+  relatorioCorridas = {
+    "CorridasMes": contaCorridasMes,
+    "CorridasSolicitadas": contaCorridasSolicitadas
+  }
+  
+  print(relatorioCorridas)
+  return jsonify(relatorioCorridas)
+  

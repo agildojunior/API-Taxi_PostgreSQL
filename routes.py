@@ -169,17 +169,16 @@ def get_corridas_by_empresas(current_empresa,id_empresa):
 def get_corridas_report():
   
   contaCorridasMes = Corridas.query.filter(Corridas.created_at > date(2022, 8, 1)).count()
-  contaCorridasFinalizadas = Corridas.query.filter_by(status = 'finalizadas').count()
+  contaCorridasSolicitadas = Corridas.query.filter_by(status = 'Solicitada', id_empresa = 1).count()
   
   print(contaCorridasMes)
-  print(contaCorridasFinalizadas)
+  print(contaCorridasSolicitadas)
   
   relatorioCorridas = {
     'CorridasMes': contaCorridasMes,
-    'CorridasFinalizadas': contaCorridasFinalizadas
+    'CorridasFinalizadas': contaCorridasSolicitadas
   }
-  
-  
+
   return relatorioCorridas
   
 
