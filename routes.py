@@ -179,6 +179,7 @@ def get_corridas_report():
     'CorridasFinalizadas': contaCorridasFinalizadas
   }
   
+  
   return relatorioCorridas
   
 
