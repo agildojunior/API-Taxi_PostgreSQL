@@ -1,7 +1,12 @@
+from datetime import date, datetime
 from flask_cors import CORS
 from config import app
 from auth import token_required
 from controllers import corridasController, empresasController, taxisController, usuariosController
+from models.entities.Corridas import Corridas
+from sqlalchemy import func
+from flask import jsonify
+
 cors = CORS(app)
 
 # --------------------------------------------------------------------------
@@ -74,12 +79,6 @@ def update_corridas(current_empresa,id):
 def delete_corridas(current_empresa,id):
   return corridasController.delete(current_empresa,id)
 
-#Pegar dados da corrida por ID da empresa
-@app.route("/relatorio/corridas/<id_empresa>" , methods=["GET"])
-@token_required
-def get_corridas_by_empresas(current_empresa,id_empresa):
-  return corridasController.get_by_id_empresa(current_empresa,id_empresa)
-
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 #                                   Taxis
@@ -130,6 +129,7 @@ def get_usuarios(current_empresa):
 @app.route("/usuarios/<int:id>" , methods=["GET"])
 @token_required
 def get_usuarios_by_id(current_empresa,id):
+  
   return usuariosController.get_by_id(current_empresa,id)
 
 #Adicionar dados
@@ -155,6 +155,32 @@ def get_usuarios_by_email(current_empresa,email):
 @token_required
 def delete_usuarios(current_empresa,id):
   return usuariosController.delete(current_empresa,id)
+
+# -------------------------------------------------------------------------
+
+#Pegar dados da corrida por ID da empresa
+@app.route("/relatorio/corridas/<id_empresa>" , methods=["GET"])
+@token_required
+def get_corridas_by_empresas(current_empresa,id_empresa):
+  return corridasController.get_by_id_empresa(current_empresa,id_empresa)
+
+#Rota do relatorio de corridas
+@app.route("/relatorio/corridas/", methods=["GET"])
+def get_corridas_report():
+  
+  contaCorridasMes = Corridas.query.filter(Corridas.created_at > date(2022, 8, 1)).count()
+  contaCorridasFinalizadas = Corridas.query.filter_by(status = 'finalizadas').count()
+  
+  print(contaCorridasMes)
+  print(contaCorridasFinalizadas)
+  
+  relatorioCorridas = {
+    'CorridasMes': contaCorridasMes,
+    'CorridasFinalizadas': contaCorridasFinalizadas
+  }
+  
+  return relatorioCorridas
+  
 
 # -------------------------------------------------------------------------
 
